@@ -30,7 +30,7 @@ func ReadFileData() {
 	}
 
 	for _, v := range data {
-		v.
+		log.Println(v.DataValue)
 	}
 
 }

@@ -5,7 +5,6 @@ import (
 	"log"
 	"time"
 
-	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/reader"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -21,5 +20,4 @@ func main() {
 	defer client.Disconnect(ctx)
 	err = client.Ping(ctx, readpref.Primary())
 
-	reader.ReadFileData()
 }
