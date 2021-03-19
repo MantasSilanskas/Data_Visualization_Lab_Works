@@ -5,6 +5,7 @@ import (
 	"log"
 	"time"
 
+	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/reader"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -18,10 +19,7 @@ func main() {
 		log.Fatalln("failed to connect to database", err)
 	}
 	defer client.Disconnect(ctx)
-	ctx, cancel = context.WithTimeout(context.Background(), 2*time.Second)
-	defer cancel()
 	err = client.Ping(ctx, readpref.Primary())
 
 	reader.ReadFileData()
-
 }
