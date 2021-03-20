@@ -7,6 +7,8 @@ import (
 	"github.com/gocarina/gocsv"
 )
 
+var dataFilesPath = "../cmd/data/"
+
 func InputFiles(filename string) ([]File, error) {
 
 	var (
@@ -14,7 +16,7 @@ func InputFiles(filename string) ([]File, error) {
 		list []File
 	)
 
-	file, err := os.Open("../cmd/data/" + filename)
+	file, err := os.Open(dataFilesPath + filename)
 	if err != nil {
 		log.Println(err)
 		return list, err
@@ -39,7 +41,7 @@ func ReadFileData(inputFile string) ([]DeviceData, error) {
 
 	list := []DeviceData{}
 
-	file, err := os.Open("../cmd/data/" + inputFile)
+	file, err := os.Open(dataFilesPath + inputFile)
 	if err != nil {
 		log.Println(err)
 		return list, err
