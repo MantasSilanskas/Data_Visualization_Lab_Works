@@ -3,24 +3,38 @@ package database
 import (
 	"context"
 	"log"
-	"time"
 
+	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/reader"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-// Connection connect to local mongo database
-func Connection() (mongo.Client, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
-	if err != nil {
-		log.Println("failed to connect to database", err)
-		return *client, err
-	}
-	defer client.Disconnect(ctx)
-	err = client.Ping(ctx, readpref.Primary())
+type Database interface {
+	AddFileNames(input reader.File) error
+	AddDeviceData(input []reader.DeviceData) error
+	connection() (*mongo.Client, error)
+}
 
-	return *client, nil
+// Connection connect to local mongo database
+func Connection() (*mongo.Client, error) {
+	// Set client options
+	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
+
+	// Connect to MongoDB
+	client, err := mongo.Connect(context.TODO(), clientOptions)
+	if err != nil {
+		log.Println("failed to connect to database. ", err)
+		return client, err
+	}
+
+	// Check the connection
+	err = client.Ping(context.TODO(), nil)
+	if err != nil {
+		log.Println("failed to ping database. ", err)
+		return client, err
+	}
+
+	log.Println("Connected to MongoDB successfully!")
+
+	return client, nil
 }
