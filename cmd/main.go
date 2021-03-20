@@ -1,23 +1,33 @@
 package main
 
 import (
-	"context"
 	"log"
-	"time"
 
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
+	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/database"
+	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/reader"
 )
 
 func main() {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
+
+	err := database.Connection()
 	if err != nil {
-		log.Fatalln("failed to connect to database", err)
+		log.Println("failed to connect to database", err)
+		return
 	}
-	defer client.Disconnect(ctx)
-	err = client.Ping(ctx, readpref.Primary())
+
+	filename := "filesNames.csv"
+	filesNames, err := reader.InputFiles(filename)
+	if err != nil {
+		log.Println("failed to read input files names list", err)
+		return
+	}
+
+	for _, v := range filesNames {
+		_, err = reader.ReadFileData(v.Name)
+		if err != nil {
+			log.Println("failed to read file data", err)
+			return
+		}
+	}
 
 }
