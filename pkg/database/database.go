@@ -1,13 +1,15 @@
 package database
 
 import (
+	"context"
+	"log"
 	"time"
 
 	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/reader"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
-//Database and collections names
+//Database name
 var (
 	database = "local"
 )
@@ -54,4 +56,4 @@ func DeviceInputToBSON(input reader.DeviceData) BSONDeviceData {
 		DataType:    input.DataType,
 		DataValue:   input.DataValue,
 	}
-}
+
