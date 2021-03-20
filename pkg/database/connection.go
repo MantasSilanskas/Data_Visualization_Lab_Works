@@ -6,7 +6,6 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 // Connection connect to local mongo database
@@ -17,11 +16,18 @@ func Connection() (*mongo.Client, error) {
 	// Connect to MongoDB
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
-		log.Println("failed to connect to database", err)
+		log.Println("failed to connect to database. ", err)
 		return client, err
 	}
-	defer client.Disconnect(ctx)
-	err = client.Ping(ctx, readpref.Primary())
 
-	return nil
+	// Check the connection
+	err = client.Ping(context.TODO(), nil)
+	if err != nil {
+		log.Println("failed to ping database. ", err)
+		return client, err
+	}
+
+	log.Println("Connected to MongoDB successfully!")
+
+	return client, nil
 }

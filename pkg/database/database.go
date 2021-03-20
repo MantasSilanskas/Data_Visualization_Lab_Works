@@ -39,7 +39,6 @@ func FileInputToBSON(input reader.File) BSONFile {
 
 func DevicesInputToBSON(input []reader.DeviceData) []BSONDeviceData {
 	list := []BSONDeviceData{}
-
 	for _, v := range input {
 		list = append(list, DeviceInputToBSON(v))
 	}
