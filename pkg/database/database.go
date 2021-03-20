@@ -9,45 +9,51 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-//Database and collections names
+//Database name
 var (
-	databaseName = "local"
-	dataFiles    = "files"
-	data         = "devicesData"
+	database = "local"
 )
 
-// AddFileNames adds file name to files collection after they data has
-// been insert to data collection
-func AddFile(client mongo.Client, input reader.File) error {
-
-	input.InputTime = time.Now()
-
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	collection := client.Database(databaseName).Collection(dataFiles)
-
-	_, err := collection.InsertOne(ctx, input)
-	if err != nil {
-		log.Println("Failed to insert data to database. Error:", err)
-		return err
-	}
-	return nil
+type BSONFile struct {
+	ID         primitive.ObjectID `bson:"_id"`
+	FileNumber int                `bson:"number"`
+	FileName   string             `bson:"name"`
+	InputTime  time.Time          `bson:"inputTime"`
 }
 
-// AddDeviceData adds device data to database
-func AddDeviceData(client mongo.Client, input []reader.DeviceData) error {
+type BSONDeviceData struct {
+	ID          primitive.ObjectID `bson:"_id"`
+	DeviceID    string             `bson:"deviceId"`
+	TimeStamp   time.Time          `bson:"timeStamp"`
+	TimeStampMs int64              `bson:"timeStampMs"`
+	DataType    string             `bson:"type"`
+	DataValue   float32            `bson:"value"`
+}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	collection := client.Database(databaseName).Collection(data)
+func FileInputToBSON(input reader.File) BSONFile {
+	return BSONFile{
+		ID:         primitive.NewObjectID(),
+		FileNumber: input.Number,
+		FileName:   input.Name,
+		InputTime:  input.InputTime,
+	}
+}
 
+func DevicesInputToBSON(input []reader.DeviceData) []BSONDeviceData {
+	list := []BSONDeviceData{}
 	for _, v := range input {
-		_, err := collection.InsertOne(ctx, v)
-		if err != nil {
-			log.Println("Failed to insert data to database. Error:", err)
-			return err
-		}
+		list = append(list, DeviceInputToBSON(v))
+	}
+	return list
+}
+
+func DeviceInputToBSON(input reader.DeviceData) BSONDeviceData {
+	return BSONDeviceData{
+		ID:          primitive.NewObjectID(),
+		DeviceID:    input.DeviceID,
+		TimeStamp:   input.TimeStamp,
+		TimeStampMs: input.TimeStampMs,
+		DataType:    input.DataType,
+		DataValue:   input.DataValue,
 	}
 
-	return nil
-}

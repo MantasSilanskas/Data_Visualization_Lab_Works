@@ -8,6 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+// InsertData inserts all files data to database which are in filesNames.
 func InsertData(client *mongo.Client, filename string) error {
 	filesNames, err := reader.InputFiles(filename)
 	if err != nil {
@@ -16,22 +17,24 @@ func InsertData(client *mongo.Client, filename string) error {
 	}
 
 	for _, v := range filesNames {
-		data, err := reader.ReadFileData(v.Name)
+		rawDevicesData, err := reader.ReadFileData(v.Name)
 		if err != nil {
 			log.Println("failed to read file data", err)
 			return err
 		}
-		err = database.AddFile(*client, v)
+		file := database.FileInputToBSON(v)
+		err = database.AddFile(*client, file)
 		if err != nil {
 			log.Println("failed to add file to database. Error:", err)
 			return err
 		}
-		err = database.AddDeviceData(*client, data)
+		devicesData := database.DevicesInputToBSON(rawDevicesData)
+		err = database.AddDeviceData(*client, devicesData)
 		if err != nil {
 			log.Println("failed to add file data to database. Error:", err)
 			return err
 		}
 	}
-
+	log.Println("Succesfully added data to database")
 	return nil
 }

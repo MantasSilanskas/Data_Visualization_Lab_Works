@@ -9,12 +9,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-type Database interface {
-	AddFileNames(input reader.File) error
-	AddDeviceData(input []reader.DeviceData) error
-	connection() (*mongo.Client, error)
-}
-
 // Connection connect to local mongo database
 func Connection() (*mongo.Client, error) {
 	// Set client options
