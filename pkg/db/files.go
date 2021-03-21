@@ -30,8 +30,8 @@ func AddFile(client mongo.Client, input BSONFile) error {
 	return nil
 }
 
-// FilterAll returns all documents in files collection
-func FilterAll(client *mongo.Client, filter bson.M) ([]BSONFile, error) {
+// FilterAllFiles returns all documents in files collection
+func FilterAllFiles(client *mongo.Client) ([]BSONFile, error) {
 
 	list := []BSONFile{}
 
@@ -39,7 +39,7 @@ func FilterAll(client *mongo.Client, filter bson.M) ([]BSONFile, error) {
 	defer cancel()
 	collection := client.Database(database).Collection(filesCollection)
 
-	c, err := collection.Find(ctx, filter)
+	c, err := collection.Find(ctx, bson.M{})
 	if err != nil {
 		log.Println("Failed to extract data from database. Error:", err)
 		return list, err
