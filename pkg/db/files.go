@@ -10,7 +10,7 @@ import (
 )
 
 //Files collection name
-var filesCollection = "files"
+const collectionFiles = "files"
 
 // AddFile adds file to files collection after they data has
 // been insert to data collection
@@ -20,7 +20,7 @@ func AddFile(client mongo.Client, input BSONFile) error {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	collection := client.Database(database).Collection(filesCollection)
+	collection := client.Database(database).Collection(collectionFiles)
 
 	_, err := collection.InsertOne(ctx, input)
 	if err != nil {
@@ -37,7 +37,7 @@ func FilterAllFiles(client *mongo.Client) ([]BSONFile, error) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	collection := client.Database(database).Collection(filesCollection)
+	collection := client.Database(database).Collection(collectionFiles)
 
 	c, err := collection.Find(ctx, bson.M{})
 	if err != nil {

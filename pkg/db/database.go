@@ -8,9 +8,7 @@ import (
 )
 
 //Database name
-var (
-	database = "local"
-)
+const database = "local"
 
 type BSONFile struct {
 	ID         primitive.ObjectID `bson:"_id"`
