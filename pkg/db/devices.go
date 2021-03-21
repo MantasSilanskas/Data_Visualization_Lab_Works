@@ -10,14 +10,14 @@ import (
 )
 
 //Devices data collection name
-var devicesCollection = "devicesData"
+const collectionDevices = "devicesData"
 
 // AddDeviceData adds device data to database
 func AddDeviceData(client mongo.Client, input []BSONDeviceData) error {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	collection := client.Database(database).Collection(devicesCollection)
+	collection := client.Database(database).Collection(collectionDevices)
 
 	for _, v := range input {
 		_, err := collection.InsertOne(ctx, v)
@@ -37,7 +37,7 @@ func FilterAllDevices(client *mongo.Client) ([]BSONDeviceData, error) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	collection := client.Database(database).Collection(devicesCollection)
+	collection := client.Database(database).Collection(collectionDevices)
 
 	c, err := collection.Find(ctx, bson.M{})
 	if err != nil {
@@ -64,7 +64,7 @@ func FilterDevicesByID(client *mongo.Client, filter bson.M) ([]BSONDeviceData, e
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	collection := client.Database(database).Collection(devicesCollection)
+	collection := client.Database(database).Collection(collectionDevices)
 
 	c, err := collection.Find(ctx, filter)
 	if err != nil {
