@@ -3,35 +3,24 @@ package main
 import (
 	"log"
 
-	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/database"
-	"go.mongodb.org/mongo-driver/bson"
+	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg"
+	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/db"
 )
 
 func main() {
 
-	//var filename = "filesNames.csv"
-	filter := bson.M{}
+	var filename = "filesNames.csv"
 
-	client, err := database.Connection()
+	client, err := db.Connection()
 	if err != nil {
 		log.Println("failed to connect to database.", err)
 		return
 	}
 
-	// err = pkg.InsertData(client, filename)
-	// if err != nil {
-	// 	log.Println("failed to insert data to database. ", err)
-	// 	return
-	// }
-
-	files, err := database.FilterAll(client, filter)
+	err = pkg.InsertData(client, filename)
 	if err != nil {
-		log.Println(err)
+		log.Println("failed to insert data to database. ", err)
 		return
 	}
 
-	for _, v := range files {
-		log.Println(v.FileName)
-	}
-	log.Println(len(files))
 }

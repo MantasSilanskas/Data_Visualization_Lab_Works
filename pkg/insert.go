@@ -5,6 +5,7 @@ import (
 
 	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/database"
 	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/reader"
+	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/utils"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -12,40 +13,43 @@ import (
 // InsertData inserts all files data to database which are in filesNames.
 func InsertData(client *mongo.Client, filename string) error {
 
-	files, err := RemoveDuplicateFiles(filename)
+	files, err := removeDuplicateFiles(client, filename)
 	if err != nil {
 		log.Println("Failed to remove duplicates files from input", err)
 	}
 
-	for _, v := range files {
-		rawDevicesData, err := reader.ReadFileData(v.Name)
-		if err != nil {
-			log.Println("failed to read file data", err)
-			return err
-		}
+	if len(files) > 0 {
+		for _, v := range files {
+			rawDevicesData, err := reader.ReadFileData(v.Name)
+			if err != nil {
+				log.Println("failed to read file data", err)
+				return err
+			}
 
-		file := database.FileInputToBSON(v)
-		devicesData := database.DevicesInputToBSON(rawDevicesData)
+			file := database.FileInputToBSON(v)
+			devicesData := database.DevicesInputToBSON(rawDevicesData)
 
-		err = database.AddDeviceData(*client, devicesData)
-		if err != nil {
-			log.Println("failed to add file data to database. Error:", err)
-			return err
-		}
+			err = database.AddDeviceData(*client, devicesData)
+			if err != nil {
+				log.Println("failed to add file data to database. Error:", err)
+				return err
+			}
 
-		err = database.AddFile(*client, file)
-		if err != nil {
-			log.Println("failed to add file to database. Error:", err)
-			return err
+			err = database.AddFile(*client, file)
+			if err != nil {
+				log.Println("failed to add file to database. Error:", err)
+				return err
+			}
 		}
+		log.Println("Data succesfully added to database")
+	} else {
+		log.Println("There were no new data to add to database")
 	}
-
-	log.Println("Succesfully added data to database")
 
 	return nil
 }
 
-func RemoveDuplicateFiles(client *mongo.Client, filename string) ([]reader.File, error) {
+func removeDuplicateFiles(client *mongo.Client, filename string) ([]reader.File, error) {
 
 	var (
 		inputFiles []reader.File

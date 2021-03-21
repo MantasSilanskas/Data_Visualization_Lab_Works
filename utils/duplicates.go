@@ -1,4 +1,4 @@
-package pkg
+package utils
 
 import (
 	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/database"

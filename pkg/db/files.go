@@ -39,15 +39,16 @@ func FilterAll(client *mongo.Client, filter bson.M) ([]BSONFile, error) {
 	defer cancel()
 	collection := client.Database(database).Collection(filesCollection)
 
-	cursor, err := collection.Find(ctx, filter)
+	c, err := collection.Find(ctx, filter)
 	if err != nil {
 		log.Println("Failed to extract data from database. Error:", err)
 		return list, err
 	}
 
-	for cursor.Next(ctx) {
+	for c.Next(ctx) {
 		file := BSONFile{}
-		err := cursor.Decode(&file)
+
+		err := c.Decode(&file)
 		if err != nil {
 			log.Println("Failed to decode cursor. Error:", err)
 			return list, err
