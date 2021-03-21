@@ -14,7 +14,7 @@ func InsertData(client *mongo.Client, filename string) error {
 
 	files, err := removeDuplicateFiles(client, filename)
 	if err != nil {
-		log.Println("Failed to remove duplicates files from input", err)
+		log.Println("Failed to remove duplicates files from input. Error:", err)
 	}
 
 	if len(files) > 0 {
