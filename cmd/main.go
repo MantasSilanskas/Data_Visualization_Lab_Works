@@ -13,13 +13,13 @@ func main() {
 
 	client, err := db.Connection()
 	if err != nil {
-		log.Println("failed to connect to database.", err)
+		log.Println("failed to connect to database. Error:", err)
 		return
 	}
 
 	err = pkg.InsertData(client, filename)
 	if err != nil {
-		log.Println("failed to insert data to database. ", err)
+		log.Println("failed to insert data to database. Error:", err)
 		return
 	}
 

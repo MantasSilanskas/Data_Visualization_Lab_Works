@@ -16,14 +16,14 @@ func Connection() (*mongo.Client, error) {
 	// Connect to MongoDB
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
-		log.Println("failed to connect to database. ", err)
+		log.Println("failed to connect to database. Error:", err)
 		return client, err
 	}
 
 	// Check the connection
 	err = client.Ping(context.TODO(), nil)
 	if err != nil {
-		log.Println("failed to ping database. ", err)
+		log.Println("failed to ping database. Error:", err)
 		return client, err
 	}
 

@@ -21,7 +21,7 @@ func InsertData(client *mongo.Client, filename string) error {
 		for _, v := range files {
 			rawDevicesData, err := reader.ReadFileData(v.Name)
 			if err != nil {
-				log.Println("failed to read file data", err)
+				log.Println("Failed to read file data. Error:", err)
 				return err
 			}
 
@@ -30,13 +30,13 @@ func InsertData(client *mongo.Client, filename string) error {
 
 			err = db.AddDeviceData(*client, devicesData)
 			if err != nil {
-				log.Println("failed to add file data to database. Error:", err)
+				log.Println("Failed to add file data to database. Error:", err)
 				return err
 			}
 
 			err = db.AddFile(*client, file)
 			if err != nil {
-				log.Println("failed to add file to database. Error:", err)
+				log.Println("Failed to add file to database. Error:", err)
 				return err
 			}
 		}
@@ -58,12 +58,12 @@ func removeDuplicateFiles(client *mongo.Client, filename string) ([]reader.File,
 	list := []reader.File{}
 
 	if files, err = db.FilterAllFiles(client); err != nil {
-		log.Println("failed to extracts files from database. Error:", err)
+		log.Println("Failed to extracts files from database. Error:", err)
 		return list, err
 	}
 
 	if inputFiles, err = reader.InputFiles(filename); err != nil {
-		log.Println("failed to read input files names list. Error:", err)
+		log.Println("Failed to read input files names list. Error:", err)
 		return list, err
 	}
 
