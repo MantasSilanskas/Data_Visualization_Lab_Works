@@ -40,8 +40,9 @@ func calcHumidyti(data filter.FilteredData) (mean float32, count int) {
 	}
 
 	mean = total / float32(len(data.Humidity))
+	count = len(data.Humidity)
 
-	return mean, len(data.Humidity)
+	return mean, count
 }
 
 func calcTemperature(data filter.FilteredData) (mean float32, count int) {
@@ -53,8 +54,9 @@ func calcTemperature(data filter.FilteredData) (mean float32, count int) {
 	}
 
 	mean = total / float32(len(data.Temperature))
+	count = len(data.Temperature)
 
-	return mean, len(data.Temperature)
+	return mean, count
 }
 
 func calcCo2(data filter.FilteredData) (mean float32, count int) {
@@ -66,6 +68,7 @@ func calcCo2(data filter.FilteredData) (mean float32, count int) {
 	}
 
 	mean = total / float32(len(data.Co2))
+	count = len(data.Co2)
 
-	return mean, len(data.Co2)
+	return mean, count
 }

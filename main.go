@@ -6,6 +6,7 @@ import (
 	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/internal"
 	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/internal/db"
 	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/internal/results"
+	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/internal/server"
 )
 
 const filename = "filesNames.csv"
@@ -30,9 +31,19 @@ func main() {
 		return
 	}
 
-	_, err = results.AllResults(names, client)
+	res, err := results.CalcResults(names, client)
 	if err != nil {
 		log.Println("Failed to calculate results. Error:", err)
+		return
+	}
+
+	humidity, temperature, co2 := results.PrepareResults(res)
+
+	log.Println(humidity, temperature, co2)
+
+	err = server.Connection()
+	if err != nil {
+		log.Println("Failed to start HTTP server. Error:", err)
 		return
 	}
 }

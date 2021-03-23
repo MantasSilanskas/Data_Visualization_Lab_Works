@@ -1,18 +1,24 @@
-// package server
+package server
 
-// import (
-// 	"net/http"
-// 	"os"
+import (
+	"log"
+	"net/http"
+)
 
-// 	"github.com/go-echarts/go-echarts/charts"
-// 	"github.com/go-echarts/go-echarts/opts"
-// )
+func Connection() error {
 
-// func Connection() {
-// 	http.HandleFunc("/", humidityHandler)
-// 	http.ListenAndServe(":8081", nil)
-// }
+	// Handlers
+	http.HandleFunc("/", HumidityHandler)
 
-// func humidityHandler(w http.ResponseWriter, r *http.Request) {
+	// HTTP server
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		log.Println("Failed to start HTTP server. Error:", err)
+		return err
+	}
+	return nil
+}
 
-// }
+func HumidityHandler(w http.ResponseWriter, r *http.Request) {
+
+}
