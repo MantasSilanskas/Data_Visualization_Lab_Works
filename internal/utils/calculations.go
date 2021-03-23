@@ -1,6 +1,6 @@
 package utils
 
-import "github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/filter"
+import "github.com/MantasSilanskas/Data_Visualization_Lab_Works/internal/filter"
 
 type CalculatedData struct {
 	DeviceID         string  `json:"deviceId"`

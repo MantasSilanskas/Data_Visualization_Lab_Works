@@ -12,12 +12,12 @@ import (
 func UniqueDevicesIDs(client *mongo.Client) ([]string, error) {
 
 	var (
-		files []db.BSONFile
+		files []BSONFile
 		err   error
 	)
 	list := []string{}
 
-	if files, err = db.FilterAllFiles(client); err != nil {
+	if files, err = FilterAllFiles(client); err != nil {
 		log.Println("Failed to extracts files from database. Error:", err)
 		return list, err
 	}

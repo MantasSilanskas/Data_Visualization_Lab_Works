@@ -3,7 +3,7 @@ package db
 import (
 	"time"
 
-	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/reader"
+	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/internal/reader"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

@@ -7,7 +7,7 @@ import (
 	"github.com/gocarina/gocsv"
 )
 
-var dataFilesPath = "../cmd/data/"
+var dataFilesPath = "data/"
 
 // InputFiles reads csv file where we keep all our data files names and returns list of them
 func InputFiles(filename string) ([]File, error) {
