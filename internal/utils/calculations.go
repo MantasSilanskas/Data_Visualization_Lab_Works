@@ -35,6 +35,10 @@ func calcHumidyti(data filter.FilteredData) (mean float32, count int) {
 
 	var total float32
 
+	if len(data.Humidity) == 0 {
+		return 0, 0
+	}
+
 	for _, v := range data.Humidity {
 		total += v.Value
 	}
@@ -49,6 +53,10 @@ func calcTemperature(data filter.FilteredData) (mean float32, count int) {
 
 	var total float32
 
+	if len(data.Temperature) == 0 {
+		return 0, 0
+	}
+
 	for _, v := range data.Temperature {
 		total += v.Value
 	}
@@ -62,6 +70,10 @@ func calcTemperature(data filter.FilteredData) (mean float32, count int) {
 func calcCo2(data filter.FilteredData) (mean float32, count int) {
 
 	var total float32
+
+	if len(data.Co2) == 0 {
+		return 0, 0
+	}
 
 	for _, v := range data.Co2 {
 		total += v.Value

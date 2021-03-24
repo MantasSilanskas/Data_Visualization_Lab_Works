@@ -11,26 +11,26 @@ import (
 	"github.com/go-echarts/go-echarts/v2/types"
 )
 
-func HumidityMeanHandler(w http.ResponseWriter, r *http.Request) {
+func HumidityMeanHandler(w http.ResponseWriter, _ *http.Request) {
 	nameItems := results.DevicesID
 	bar := charts.NewBar()
 	bar.SetGlobalOptions(
 		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
 		charts.WithTitleOpts(opts.Title{
-			Title: "Devices humidity data counts",
+			Title: "Devices humidity mean data",
 		}),
 		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
-		AddSeries("Mean", results.Co2Mean)
+		AddSeries("Mean", results.HumidityMean)
 	_, err := os.Create("humidityMean.html")
 	if err != nil {
 		log.Println("Failed to create humidyti means bar")
 	}
 	bar.Render(w)
-	log.Println("Humidity mean chart has been rendered at localhost:8080/humidityMean")
+	log.Println("Humidity mean chart has been rendered at localhost:8080/humidity/mean")
 }
 
-func HumidityCountHandler(w http.ResponseWriter, r *http.Request) {
+func HumidityCountHandler(w http.ResponseWriter, _ *http.Request) {
 
 	nameItems := results.DevicesID
 	bar := charts.NewBar()
@@ -41,23 +41,26 @@ func HumidityCountHandler(w http.ResponseWriter, r *http.Request) {
 		}),
 		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
-		AddSeries("Count", results.Co2Count)
+		AddSeries("Count", results.HumidityCount)
 	_, err := os.Create("humidityCounts.html")
 	if err != nil {
 		log.Println("Failed to create humidyti data counts bar")
 	}
 	bar.Render(w)
-	log.Println("Humidity count chart has been rendered at localhost:8080/humidityCount")
+	log.Println("Humidity count chart has been rendered at localhost:8080/humidity/count")
 }
 
-func Co2MeanHandler(w http.ResponseWriter, r *http.Request) {
+func Co2MeanHandler(w http.ResponseWriter, _ *http.Request) {
 
 	nameItems := results.DevicesID
+	log.Println(len(nameItems) == len(results.Co2Mean))
+	log.Println(nameItems)
+	log.Println(results.Co2Mean)
 	bar := charts.NewBar()
 	bar.SetGlobalOptions(
 		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
 		charts.WithTitleOpts(opts.Title{
-			Title: "Devices humidity data counts",
+			Title: "Devices CO2 mean data",
 		}),
 		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
@@ -67,17 +70,17 @@ func Co2MeanHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("Failed to create co2 mean bar")
 	}
 	bar.Render(w)
-	log.Println("CO2 mean chart has been rendered at localhost:8080/co2Mean")
+	log.Println("CO2 mean chart has been rendered at localhost:8080/co2/mean")
 }
 
-func Co2CountHandler(w http.ResponseWriter, r *http.Request) {
+func Co2CountHandler(w http.ResponseWriter, _ *http.Request) {
 
 	nameItems := results.DevicesID
 	bar := charts.NewBar()
 	bar.SetGlobalOptions(
 		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
 		charts.WithTitleOpts(opts.Title{
-			Title: "Devices humidity data counts",
+			Title: "Devices CO2 count data",
 		}),
 		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
@@ -87,17 +90,17 @@ func Co2CountHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("Failed to create CO2 data counts bar")
 	}
 	bar.Render(w)
-	log.Println("CO2 mean chart has been rendered at localhost:8080/co2Count")
+	log.Println("CO2 mean chart has been rendered at localhost:8080/co2/count")
 }
 
-func TemperatureMeanHandler(w http.ResponseWriter, r *http.Request) {
+func TemperatureMeanHandler(w http.ResponseWriter, _ *http.Request) {
 
 	nameItems := results.DevicesID
 	bar := charts.NewBar()
 	bar.SetGlobalOptions(
 		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
 		charts.WithTitleOpts(opts.Title{
-			Title: "Devices humidity data counts",
+			Title: "Devices temperature mean data",
 		}),
 		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
@@ -107,17 +110,17 @@ func TemperatureMeanHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("Failed to create temperature means bar")
 	}
 	bar.Render(w)
-	log.Println("Temperature mean chart has been rendered at localhost:8080/temperatureMean")
+	log.Println("Temperature mean chart has been rendered at localhost:8080/temperature/mean")
 }
 
-func TemperatureCountHandler(w http.ResponseWriter, r *http.Request) {
+func TemperatureCountHandler(w http.ResponseWriter, _ *http.Request) {
 
 	nameItems := results.DevicesID
 	bar := charts.NewBar()
 	bar.SetGlobalOptions(
 		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
 		charts.WithTitleOpts(opts.Title{
-			Title: "Devices humidity data counts",
+			Title: "Devices temperature count data",
 		}),
 		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
@@ -127,5 +130,5 @@ func TemperatureCountHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("Failed to create temperature data counts bar")
 	}
 	bar.Render(w)
-	log.Println("Temperature count chart has been rendered at localhost:8080/temperatureCount")
+	log.Println("Temperature count chart has been rendered at localhost:8080/temperature/count")
 }
