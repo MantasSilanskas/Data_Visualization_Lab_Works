@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/go-echarts/go-echarts/charts"
-	"github.com/go-echarts/go-echarts/go-echarts/v2/opts"
+	"github.com/go-echarts/go-echarts/v2/charts"
+	"github.com/go-echarts/go-echarts/v2/opts"
 )
 
 func Connection() error {
@@ -29,13 +29,13 @@ func HumidityHandler(w http.ResponseWriter, _ *http.Request) {
 	fmt.Println("hello")
 	nameItems := []string{"testas"}
 	bar := charts.NewBar()
-	bar.SetGlobalOptions(charts.WithTitleOpts(opts.Title{"Humidyti"}))
+	bar.SetGlobalOptions()
 	bar.SetXAxis(nameItems)
-	bar.ExtendYAxis(opts.YAxis{Name: "Mean", Data: []float32{5, 5}})
+	bar.ExtendYAxis(opts.YAxis{Name: "Mean", Data: []float32{5.5}})
 	bar.ExtendYAxis(opts.YAxis{Name: "Count", Data: []int{5}})
-	f, err := os.Create("humidiry-bar.html")
+	_, err := os.Create("humidiry-bar.html")
 	if err != nil {
 		log.Println("Failed to create humidyti bar")
 	}
-	bar.Render(f)
+	bar.Render(w)
 }
