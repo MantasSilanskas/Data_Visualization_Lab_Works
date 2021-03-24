@@ -12,18 +12,15 @@ import (
 )
 
 func HumidityMeanHandler(w http.ResponseWriter, r *http.Request) {
-
-	log.Println(results.DevicesID)
-	log.Println(results.Co2Mean)
 	nameItems := results.DevicesID
 	bar := charts.NewBar()
 	bar.SetGlobalOptions(
 		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
 		charts.WithTitleOpts(opts.Title{
-			Title: "Devices humidity means",
-		}))
+			Title: "Devices humidity data counts",
+		}),
+		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
-		AddSeries("Mean", results.Co2Mean).
 		AddSeries("Mean", results.Co2Mean)
 	_, err := os.Create("humidityMean.html")
 	if err != nil {
@@ -41,7 +38,8 @@ func HumidityCountHandler(w http.ResponseWriter, r *http.Request) {
 		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
 		charts.WithTitleOpts(opts.Title{
 			Title: "Devices humidity data counts",
-		}))
+		}),
+		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
 		AddSeries("Count", results.Co2Count)
 	_, err := os.Create("humidityCounts.html")
@@ -59,8 +57,9 @@ func Co2MeanHandler(w http.ResponseWriter, r *http.Request) {
 	bar.SetGlobalOptions(
 		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
 		charts.WithTitleOpts(opts.Title{
-			Title: "Devices CO2 means",
-		}))
+			Title: "Devices humidity data counts",
+		}),
+		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
 		AddSeries("Mean", results.Co2Mean)
 	_, err := os.Create("co2Mean.html")
@@ -78,8 +77,9 @@ func Co2CountHandler(w http.ResponseWriter, r *http.Request) {
 	bar.SetGlobalOptions(
 		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
 		charts.WithTitleOpts(opts.Title{
-			Title: "Devices CO2 data counts",
-		}))
+			Title: "Devices humidity data counts",
+		}),
+		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
 		AddSeries("Count", results.Co2Count)
 	_, err := os.Create("co2Counts.html")
@@ -97,8 +97,9 @@ func TemperatureMeanHandler(w http.ResponseWriter, r *http.Request) {
 	bar.SetGlobalOptions(
 		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
 		charts.WithTitleOpts(opts.Title{
-			Title: "Devices temperature means",
-		}))
+			Title: "Devices humidity data counts",
+		}),
+		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
 		AddSeries("Mean", results.TemperatureMean)
 	_, err := os.Create("temperatureMean.html")
@@ -116,8 +117,9 @@ func TemperatureCountHandler(w http.ResponseWriter, r *http.Request) {
 	bar.SetGlobalOptions(
 		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
 		charts.WithTitleOpts(opts.Title{
-			Title: "Devices Temperature data counts",
-		}))
+			Title: "Devices humidity data counts",
+		}),
+		charts.WithLegendOpts(opts.Legend{Show: true}))
 	bar.SetXAxis(nameItems).
 		AddSeries("Count", results.TemperatureCount)
 	_, err := os.Create("temperatureCounts.html")

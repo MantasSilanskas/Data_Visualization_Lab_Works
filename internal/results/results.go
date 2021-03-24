@@ -119,14 +119,13 @@ func prepareCo2Results(data []utils.CalculatedData) []Co2Results {
 func GenerateHumidityBarData(data []HumidityResults) ([]string, []opts.BarData, []opts.BarData) {
 
 	DevicesID = []string{}
-	HumidityMean = []opts.BarData{}
-	HumidityCount = []opts.BarData{}
+	HumidityMean = make([]opts.BarData, 0)
+	HumidityCount = make([]opts.BarData, 0)
 
 	for _, v := range data {
 		DevicesID = append(DevicesID, v.DevicesID)
 		HumidityMean = append(HumidityMean, opts.BarData{Value: int(v.Mean)})
 		HumidityCount = append(HumidityCount, opts.BarData{Value: v.Count})
-		log.Println(HumidityMean)
 	}
 
 	return DevicesID, HumidityMean, HumidityCount
@@ -136,8 +135,8 @@ func GenerateHumidityBarData(data []HumidityResults) ([]string, []opts.BarData, 
 func GenerateTemperatureBarData(data []TemperatureResults) ([]string, []opts.BarData, []opts.BarData) {
 
 	DevicesID = []string{}
-	TemperatureMean = []opts.BarData{}
-	TemperatureCount = []opts.BarData{}
+	TemperatureMean = make([]opts.BarData, 0)
+	TemperatureCount = make([]opts.BarData, 0)
 
 	for _, v := range data {
 		DevicesID = append(DevicesID, v.DevicesID)
@@ -152,8 +151,9 @@ func GenerateTemperatureBarData(data []TemperatureResults) ([]string, []opts.Bar
 func GenerateCo2BarData(data []Co2Results) ([]string, []opts.BarData, []opts.BarData) {
 
 	DevicesID = []string{}
-	Co2Mean = []opts.BarData{}
-	Co2Count = []opts.BarData{}
+	Co2Mean = make([]opts.BarData, 0)
+	Co2Count = make([]opts.BarData, 0)
+
 	for _, v := range data {
 		DevicesID = append(DevicesID, v.DevicesID)
 		Co2Mean = append(Co2Mean, opts.BarData{Value: v.Mean})
