@@ -1,6 +1,6 @@
 package filter
 
-import "github.com/MantasSilanskas/Data_Visualization_Lab_Works/pkg/db"
+import "github.com/MantasSilanskas/Data_Visualization_Lab_Works/internal/db"
 
 const (
 	Humidity    = "humidity"
