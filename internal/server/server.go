@@ -1,13 +1,14 @@
 package server
 
 import (
-	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
 
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
+	"github.com/go-echarts/go-echarts/v2/types"
 )
 
 func Connection() error {
@@ -26,16 +27,28 @@ func Connection() error {
 
 func HumidityHandler(w http.ResponseWriter, _ *http.Request) {
 
-	fmt.Println("hello")
-	nameItems := []string{"testas"}
+	nameItems := []string{"1", "2", "3", "4", "5", "6", "7"}
 	bar := charts.NewBar()
-	bar.SetGlobalOptions()
-	bar.SetXAxis(nameItems)
-	bar.ExtendYAxis(opts.YAxis{Name: "Mean", Data: []float32{5.5}})
-	bar.ExtendYAxis(opts.YAxis{Name: "Count", Data: []int{5}})
+	bar.SetGlobalOptions(
+		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
+		charts.WithTitleOpts(opts.Title{
+			Title: "Devices humidity means and total counts of humidity data",
+		}))
+	bar.SetXAxis(nameItems).
+		AddSeries("Mean", generateLineItems()).
+		AddSeries("Count", generateLineItems())
 	_, err := os.Create("humidiry-bar.html")
 	if err != nil {
 		log.Println("Failed to create humidyti bar")
 	}
 	bar.Render(w)
+}
+
+// generate random data for line chart
+func generateLineItems() []opts.BarData {
+	items := make([]opts.BarData, 0)
+	for i := 0; i < 7; i++ {
+		items = append(items, opts.BarData{Value: rand.Intn(300)})
+	}
+	return items
 }
