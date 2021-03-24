@@ -2,6 +2,7 @@ package results
 
 import (
 	"log"
+	"math"
 
 	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/internal/db"
 	"github.com/MantasSilanskas/Data_Visualization_Lab_Works/internal/filter"
@@ -124,7 +125,7 @@ func GenerateHumidityBarData(data []HumidityResults) ([]string, []opts.BarData, 
 
 	for _, v := range data {
 		DevicesID = append(DevicesID, v.DevicesID)
-		HumidityMean = append(HumidityMean, opts.BarData{Value: int(v.Mean)})
+		HumidityMean = append(HumidityMean, opts.BarData{Value: RoundDown(float64(v.Mean), 2)})
 		HumidityCount = append(HumidityCount, opts.BarData{Value: v.Count})
 	}
 
@@ -140,7 +141,7 @@ func GenerateTemperatureBarData(data []TemperatureResults) ([]string, []opts.Bar
 
 	for _, v := range data {
 		DevicesID = append(DevicesID, v.DevicesID)
-		TemperatureMean = append(TemperatureMean, opts.BarData{Value: v.Mean})
+		TemperatureMean = append(TemperatureMean, opts.BarData{Value: RoundDown(float64(v.Mean), 2)})
 		TemperatureCount = append(TemperatureCount, opts.BarData{Value: v.Count})
 	}
 
@@ -156,9 +157,24 @@ func GenerateCo2BarData(data []Co2Results) ([]string, []opts.BarData, []opts.Bar
 
 	for _, v := range data {
 		DevicesID = append(DevicesID, v.DevicesID)
-		Co2Mean = append(Co2Mean, opts.BarData{Value: v.Mean})
+		Co2Mean = append(Co2Mean, opts.BarData{Value: RoundDown(float64(v.Mean), 2)})
 		Co2Count = append(Co2Count, opts.BarData{Value: v.Count})
 	}
 
 	return DevicesID, Co2Mean, Co2Count
+}
+
+func RoundDown(input float64, places int) (newVal float64) {
+
+	var round float64
+
+	pow := math.Pow(10, float64(places))
+
+	digit := pow * input
+
+	round = math.Floor(digit)
+
+	newVal = round / pow
+
+	return
 }

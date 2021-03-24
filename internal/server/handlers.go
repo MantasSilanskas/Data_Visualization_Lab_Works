@@ -18,11 +18,14 @@ func HumidityMeanHandler(w http.ResponseWriter, _ *http.Request) {
 	bar := charts.NewBar()
 
 	bar.SetGlobalOptions(
-		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
-		charts.WithTitleOpts(opts.Title{
-			Title: "Devices humidity mean data",
-		}),
-		charts.WithLegendOpts(opts.Legend{Show: true}))
+		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros, PageTitle: "Humidity records data mean bar chart"}),
+		charts.WithTitleOpts(opts.Title{Title: "Devices humidity records data mean"}),
+		charts.WithTooltipOpts(opts.Tooltip{Show: true}),
+		charts.WithLegendOpts(opts.Legend{Show: true}),
+		charts.WithXAxisOpts(opts.XAxis{Name: "Device ID", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+		charts.WithYAxisOpts(opts.YAxis{Name: "Humidity mean (%)", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+	)
+
 	bar.SetXAxis(nameItems).
 		AddSeries("Mean", results.HumidityMean)
 
@@ -44,11 +47,13 @@ func HumidityCountHandler(w http.ResponseWriter, _ *http.Request) {
 	bar := charts.NewBar()
 
 	bar.SetGlobalOptions(
-		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
-		charts.WithTitleOpts(opts.Title{
-			Title: "Devices humidity data counts",
-		}),
-		charts.WithLegendOpts(opts.Legend{Show: true}))
+		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros, PageTitle: "Humidity record data count bar chart"}),
+		charts.WithTitleOpts(opts.Title{Title: "Devices humidity record count data"}),
+		charts.WithTooltipOpts(opts.Tooltip{Show: true}),
+		charts.WithLegendOpts(opts.Legend{Show: true}),
+		charts.WithXAxisOpts(opts.XAxis{Name: "Device ID", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+		charts.WithYAxisOpts(opts.YAxis{Name: "Humidity records count", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+	)
 	bar.SetXAxis(nameItems).
 		AddSeries("Count", results.HumidityCount)
 
@@ -70,11 +75,13 @@ func Co2MeanHandler(w http.ResponseWriter, _ *http.Request) {
 	bar := charts.NewBar()
 
 	bar.SetGlobalOptions(
-		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
-		charts.WithTitleOpts(opts.Title{
-			Title: "Devices CO2 mean data",
-		}),
-		charts.WithLegendOpts(opts.Legend{Show: true}))
+		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros, PageTitle: "CO2 records data mean bar chart"}),
+		charts.WithTitleOpts(opts.Title{Title: "Devices CO2 records data mean"}),
+		charts.WithTooltipOpts(opts.Tooltip{Show: true}),
+		charts.WithLegendOpts(opts.Legend{Show: true}),
+		charts.WithXAxisOpts(opts.XAxis{Name: "Device ID", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+		charts.WithYAxisOpts(opts.YAxis{Name: "CO2 mean (ppm)", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+	)
 	bar.SetXAxis(nameItems).
 		AddSeries("Mean", results.Co2Mean)
 
@@ -96,11 +103,13 @@ func Co2CountHandler(w http.ResponseWriter, _ *http.Request) {
 	bar := charts.NewBar()
 
 	bar.SetGlobalOptions(
-		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
-		charts.WithTitleOpts(opts.Title{
-			Title: "Devices CO2 count data",
-		}),
-		charts.WithLegendOpts(opts.Legend{Show: true}))
+		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros, PageTitle: "CO2 records data count bar chart"}),
+		charts.WithTitleOpts(opts.Title{Title: "Devices CO2 records data count"}),
+		charts.WithTooltipOpts(opts.Tooltip{Show: true}),
+		charts.WithLegendOpts(opts.Legend{Show: true}),
+		charts.WithXAxisOpts(opts.XAxis{Name: "Device ID", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+		charts.WithYAxisOpts(opts.YAxis{Name: "CO2 records count", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+	)
 	bar.SetXAxis(nameItems).
 		AddSeries("Count", results.Co2Count)
 
@@ -122,11 +131,13 @@ func TemperatureMeanHandler(w http.ResponseWriter, _ *http.Request) {
 	bar := charts.NewBar()
 
 	bar.SetGlobalOptions(
-		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
-		charts.WithTitleOpts(opts.Title{
-			Title: "Devices temperature mean data",
-		}),
-		charts.WithLegendOpts(opts.Legend{Show: true}))
+		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros, PageTitle: "Temperature records data mean bar chart"}),
+		charts.WithTitleOpts(opts.Title{Title: "Devices temperature records data mean"}),
+		charts.WithTooltipOpts(opts.Tooltip{Show: true}),
+		charts.WithLegendOpts(opts.Legend{Show: true}),
+		charts.WithXAxisOpts(opts.XAxis{Name: "Device ID", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+		charts.WithYAxisOpts(opts.YAxis{Name: "Tempereture mean (C)", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+	)
 	bar.SetXAxis(nameItems).
 		AddSeries("Mean", results.TemperatureMean)
 
@@ -148,11 +159,13 @@ func TemperatureCountHandler(w http.ResponseWriter, _ *http.Request) {
 	bar := charts.NewBar()
 
 	bar.SetGlobalOptions(
-		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros}),
-		charts.WithTitleOpts(opts.Title{
-			Title: "Devices temperature count data",
-		}),
-		charts.WithLegendOpts(opts.Legend{Show: true}))
+		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros, PageTitle: "Temperature records data mean bar chart"}),
+		charts.WithTitleOpts(opts.Title{Title: "Devices temperature records count data"}),
+		charts.WithTooltipOpts(opts.Tooltip{Show: true}),
+		charts.WithLegendOpts(opts.Legend{Show: true}),
+		charts.WithXAxisOpts(opts.XAxis{Name: "Device ID", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+		charts.WithYAxisOpts(opts.YAxis{Name: "Temperature records count", AxisLabel: &opts.AxisLabel{Color: "red"}}),
+	)
 	bar.SetXAxis(nameItems).
 		AddSeries("Count", results.TemperatureCount)
 
