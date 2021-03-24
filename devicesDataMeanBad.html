@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Devices records data mean bar chart</title>
+    <script src="https://go-echarts.github.io/go-echarts-assets/assets/echarts.min.js"></script>
+    <script src="https://go-echarts.github.io/go-echarts-assets/assets/themes/westeros.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="item" id="VJAkANEBJzBQ" style="width:900px;height:500px;"></div>
+</div>
+
+<script type="text/javascript">
+    "use strict";
+    let goecharts_VJAkANEBJzBQ = echarts.init(document.getElementById('VJAkANEBJzBQ'), "westeros");
+    let option_VJAkANEBJzBQ = {"legend":{"show":false},"series":[{"name":"Temperature mean (C)","type":"bar","waveAnimation":false,"data":[{"value":22.75},{"value":24.71},{"value":25.1},{"value":23.76},{"value":22.44},{"value":23.33}]},{"name":"Co2 mean (ppm)","type":"bar","waveAnimation":false,"data":[{"value":0},{"value":697.59},{"value":556.54},{"value":638.45},{"value":615.99},{"value":658.65}]},{"name":"Humidity mean (%)","type":"bar","waveAnimation":false,"data":[{"value":47.99},{"value":41.07},{"value":36.17},{"value":40.21},{"value":46.69},{"value":45.2}]}],"title":{"text":"Devices temperature records count data"},"tooltip":{"show":false},"xAxis":[{"data":["0033C822","0034C8DF","0034C74E","0034C91E","0034C559","0034C864"]}],"yAxis":[{}]};
+    goecharts_VJAkANEBJzBQ.setOption(option_VJAkANEBJzBQ);
+</script>
+
+<style>
+    .container {margin-top:30px; display: flex;justify-content: center;align-items: center;}
+    .item {margin: auto;}
+</style>
+</body>
+</html>

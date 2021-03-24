@@ -179,3 +179,28 @@ func TemperatureCountHandler(w http.ResponseWriter, _ *http.Request) {
 
 	log.Println("Temperature count chart has been rendered at localhost:8080/temperature/count")
 }
+
+func DevicesDataMeansHandlerBad(w http.ResponseWriter, _ *http.Request) {
+	nameItems := results.DevicesID
+
+	bar := charts.NewBar()
+
+	bar.SetGlobalOptions(
+		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeWesteros, PageTitle: "Devices records data mean bar chart"}),
+		charts.WithTitleOpts(opts.Title{Title: "Devices records data means results"}),
+	)
+	bar.SetXAxis(nameItems).
+		AddSeries("Temperature mean (C)", results.TemperatureMean).
+		AddSeries("Co2 mean (ppm)", results.Co2Mean).
+		AddSeries("Humidity mean (%)", results.HumidityMean)
+
+	f, err := os.Create("devicesDataMeanBad.html")
+	if err != nil {
+		log.Println("Failed to create temperature data counts bar")
+	}
+
+	bar.Render(f)
+	bar.Render(w)
+
+	log.Println("Devices records data mean chart has been rendered at localhost:8080/devices/data/mean/bad")
+}
