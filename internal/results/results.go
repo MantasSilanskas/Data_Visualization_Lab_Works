@@ -157,7 +157,7 @@ func GenerateCo2BarData(data []Co2Results) ([]string, []opts.BarData, []opts.Bar
 	for _, v := range data {
 		DevicesID = append(DevicesID, v.DevicesID)
 		Co2Mean = append(Co2Mean, opts.BarData{Value: v.Mean})
-		Co2Count = append(Co2Mean, opts.BarData{Value: v.Count})
+		Co2Count = append(Co2Count, opts.BarData{Value: v.Count})
 	}
 
 	return DevicesID, Co2Mean, Co2Count
