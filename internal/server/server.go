@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/go-echarts/go-echarts/charts"
-	"github.com/go-echarts/go-echarts/go-echarts/v2/opts"
+	"github.com/chenjiandongx/go-echarts/charts"
+	"github.com/go-echarts/go-echarts/v2/opts"
 )
 
 func Connection() error {
