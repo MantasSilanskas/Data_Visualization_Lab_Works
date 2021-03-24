@@ -39,7 +39,9 @@ func main() {
 
 	humidity, temperature, co2 := results.PrepareResults(res)
 
-	log.Println(humidity, temperature, co2)
+	_, _, _ = results.GenerateHumidityBarData(humidity)
+	_, _, _ = results.GenerateTemperatureBarData(temperature)
+	_, _, _ = results.GenerateCo2BarData(co2)
 
 	err = server.Connection()
 	if err != nil {

@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CO2 records data count bar chart</title>
+    <script src="https://go-echarts.github.io/go-echarts-assets/assets/echarts.min.js"></script>
+    <script src="https://go-echarts.github.io/go-echarts-assets/assets/themes/westeros.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="item" id="xzaceaMFlFDT" style="width:900px;height:500px;"></div>
+</div>
+
+<script type="text/javascript">
+    "use strict";
+    let goecharts_xzaceaMFlFDT = echarts.init(document.getElementById('xzaceaMFlFDT'), "westeros");
+    let option_xzaceaMFlFDT = {"legend":{"show":true},"series":[{"name":"Count","type":"bar","waveAnimation":false,"data":[{"value":0},{"value":1973},{"value":1932},{"value":5666},{"value":5592},{"value":5493}]}],"title":{"text":"Devices CO2 records data count"},"tooltip":{"show":true},"xAxis":[{"name":"Device ID","data":["0033C822","0034C8DF","0034C74E","0034C91E","0034C559","0034C864"],"axisLabel":{"color":"red"}}],"yAxis":[{"name":"CO2 records count","axisLabel":{"color":"red"}}]};
+    goecharts_xzaceaMFlFDT.setOption(option_xzaceaMFlFDT);
+</script>
+
+<style>
+    .container {margin-top:30px; display: flex;justify-content: center;align-items: center;}
+    .item {margin: auto;}
+</style>
+</body>
+</html>
