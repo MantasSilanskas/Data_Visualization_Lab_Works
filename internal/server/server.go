@@ -22,6 +22,5 @@ func Connection() error {
 		log.Println("Failed to start HTTP server. Error:", err)
 		return err
 	}
-
 	return nil
 }

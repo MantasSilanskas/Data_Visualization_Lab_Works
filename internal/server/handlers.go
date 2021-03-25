@@ -29,7 +29,7 @@ func HumidityMeanHandler(w http.ResponseWriter, _ *http.Request) {
 	bar.SetXAxis(nameItems).
 		AddSeries("Mean", results.HumidityMean)
 
-	f, err := os.Create("humidityMean.html")
+	f, err := os.Create("charts/humidityMean.html")
 	if err != nil {
 		log.Println("Failed to create humidyti means bar")
 	}
@@ -57,7 +57,7 @@ func HumidityCountHandler(w http.ResponseWriter, _ *http.Request) {
 	bar.SetXAxis(nameItems).
 		AddSeries("Count", results.HumidityCount)
 
-	f, err := os.Create("humidityCounts.html")
+	f, err := os.Create("charts/humidityCounts.html")
 	if err != nil {
 		log.Println("Failed to create humidyti data counts bar")
 	}
@@ -85,7 +85,7 @@ func Co2MeanHandler(w http.ResponseWriter, _ *http.Request) {
 	bar.SetXAxis(nameItems).
 		AddSeries("Mean", results.Co2Mean)
 
-	f, err := os.Create("co2Mean.html")
+	f, err := os.Create("charts/co2Mean.html")
 	if err != nil {
 		log.Println("Failed to create co2 mean bar")
 	}
@@ -113,7 +113,7 @@ func Co2CountHandler(w http.ResponseWriter, _ *http.Request) {
 	bar.SetXAxis(nameItems).
 		AddSeries("Count", results.Co2Count)
 
-	f, err := os.Create("co2Counts.html")
+	f, err := os.Create("charts/co2Counts.html")
 	if err != nil {
 		log.Println("Failed to create CO2 data counts bar")
 	}
@@ -141,7 +141,7 @@ func TemperatureMeanHandler(w http.ResponseWriter, _ *http.Request) {
 	bar.SetXAxis(nameItems).
 		AddSeries("Mean", results.TemperatureMean)
 
-	f, err := os.Create("temperatureMean.html")
+	f, err := os.Create("charts/temperatureMean.html")
 	if err != nil {
 		log.Println("Failed to create temperature means bar")
 	}
@@ -169,7 +169,7 @@ func TemperatureCountHandler(w http.ResponseWriter, _ *http.Request) {
 	bar.SetXAxis(nameItems).
 		AddSeries("Count", results.TemperatureCount)
 
-	f, err := os.Create("temperatureCounts.html")
+	f, err := os.Create("charts/temperatureCounts.html")
 	if err != nil {
 		log.Println("Failed to create temperature data counts bar")
 	}
@@ -194,7 +194,7 @@ func DevicesDataMeansHandlerBad(w http.ResponseWriter, _ *http.Request) {
 		AddSeries("Co2 mean (ppm)", results.Co2Mean).
 		AddSeries("Humidity mean (%)", results.HumidityMean)
 
-	f, err := os.Create("devicesDataMeanBad.html")
+	f, err := os.Create("charts/devicesDataMeanBad.html")
 	if err != nil {
 		log.Println("Failed to create temperature data counts bar")
 	}
