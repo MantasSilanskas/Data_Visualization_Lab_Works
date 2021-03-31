@@ -20,6 +20,9 @@ var (
 	TemperatureCount []opts.BarData
 	Co2Mean          []opts.BarData
 	Co2Count         []opts.BarData
+	Humidity         []opts.BoxPlotData
+	Temperature      []opts.BoxPlotData
+	Co2              []opts.BoxPlotData
 )
 
 type HumidityResults struct {
@@ -164,6 +167,16 @@ func GenerateCo2BarData(data []Co2Results) ([]string, []opts.BarData, []opts.Bar
 	return DevicesID, Co2Mean, Co2Count
 }
 
+func GenerateHumidityBoxPlotData(data []Co2Results) ([]string, []opts.BoxPlotData) {
+
+	DevicesID = []string{}
+	Humidity = make([]opts.BoxPlotData, 0)
+
+	Humidity = append(Humidity, opts.BoxPlotData{})
+
+	return DevicesID, Humidity
+}
+
 func RoundDown(input float64, places int) (newVal float64) {
 
 	var round float64
@@ -177,4 +190,12 @@ func RoundDown(input float64, places int) (newVal float64) {
 	newVal = round / pow
 
 	return
+}
+
+func MinMax(data Co2Results) (min, max float64) {
+
+	for _, v := range data {
+
+	}
+	return min, max
 }
